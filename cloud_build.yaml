@@ -1,0 +1,20 @@
+steps:
+  # Run the Maven build
+  - name: maven:3.6.0-jdk-11-slim
+    entrypoint: 'mvn'
+    args: ['clean', 'install', '-DskipTests']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'docker.io/saurabh2204/patch-management-services:latest', '.']
+  # push container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'docker.io/saurabh2204/patch-management-services:latest']
+  # Deploy on GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+    - run
+    - --filename=deployment.yaml
+    - --image=docker.io/saurabh2204/patch-management-services:latest
+    - --location=us-central1-c
+    - --cluster=cluster-1
+options:
+  logging: CLOUD_LOGGING_ONLY
