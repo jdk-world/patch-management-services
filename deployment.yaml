@@ -46,7 +46,7 @@ spec:
         image: docker.io/saurabh2204/patch-management-services:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 8899
+        - containerPort: 8897
         resources:
           limits:
             cpu: 500m
