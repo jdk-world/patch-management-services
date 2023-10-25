@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    function myFunctionHol() {
+    	//alert('Hello');
+    	var number=document.getElementById("holiday_calendar").value;  
+	    //document.getElementById(holiday_calendar).disabled = "false";
+	   // document.getElementById(holiday_calendar).value;
+	   var val = 5; 
+    	//alert('Hello2' + number);
+    	
+    	var earlierValue=document.getElementById("demo1").innerHTML;
+    	//alert('hhello'+earlierValue);
+    	if (earlierValue === "") {
+    		document.getElementById("demo1").innerHTML = number;
+    	     // alert('Empty')
+
+    	}else {
+    	      document.getElementById("demo1").innerHTML = earlierValue+", "+number;
+    	    //  alert('value')
+
+    	}
+    	document.getElementById("holidays").value=document.getElementById("demo1").innerHTML;
+    }
+    
+    function myFunction() {
+            document.getElementById("helloid").style.display = "block";
+            document.getElementById("helloid").className = "loader";
+            
+        }
+
+        function myDate() {
+            n = new Date();
+            y = n.getFullYear();
+            m = n.getMonth() + 1;
+            d = n.getDate();
+
+            slot_start_val = y + "-" + m.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "-"
+                + d.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "T" + "09:00";
+            slot_end_val = y + "-" + m.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "-"
+                + d.toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "T" + "10:00";
+
+            document.getElementById("slot_start").setAttribute("value", slot_start_val);
+            document.getElementById("slot_end").setAttribute("value", slot_end_val);
+            document.getElementById("slots_end").setAttribute("value", slot_end_val);
+            document.getElementById("slots_start").setAttribute("value", slot_start_val);
+
+
+        }
+
+        // JavaScript to handle tab switching
+        function openTab(tabName) {
+            var i, tabContent, tabLinks;
+            tabContent = document.getElementsByClassName("tabContent");
+            for (i = 0; i < tabContent.length; i++) {
+                tabContent[i].style.display = "none";
+            }
+            tabLinks = document.getElementsByClassName("tabLink");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            event.currentTarget.className += " active";
+        }
+    </script>
+    <title>IT Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    
+ /* Apply the "narrow-input" class to the select element to reduce width */
+.form-container select.narrow-input {
+    width: 51.5%; /* Adjust the width as needed */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+  .add-holiday-container {
+    display: inline-flex;
+    align-items: center;
+}
+  
+  /* Apply the "narrow-input-button" class to the button element to reduce its width */
+.narrow-input-button {
+    width: 50%; /* Adjust the width as needed */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none; /* Remove the border for the button */
+    background-color: #3498db; /* Match button styling */
+    color: white; /* Text color */
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Apply the "narrow-input-date" class to the date input element */
+.narrow-input-date {
+    width: 50%; /* Adjust the width as needed */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+    
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.menu-item {
+    margin-left: 20px;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #3498db;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.menu-link:hover {
+    background-color: #2980b9;
+}
+
+
+ .menu-container {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0;
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .menu-item {
+            margin-left: 20px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #3498db;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .menu-link:hover {
+            background-color: #2980b9;
+        }
+    
+#listOfAllSlots {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	border: 1px solid #ddd;
+}
+
+/* Style table header */
+#listOfAllSlots th {
+	background-color: #3498db;
+	color: white;
+	text-align: left;
+	padding: 12px;
+	font-weight: bold;
+	border: 1px solid #ddd;
+}
+
+/* Style table rows */
+#listOfAllSlots td {
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+/* Alternate row background color */
+#listOfAllSlots tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+/* Style the buttons in each row */
+#listOfAllSlots button {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	padding: 6px 12px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+#listOfAllSlots button:hover {
+	background-color: #2574a9;
+}
+
+/* Disable button style */
+#listOfAllSlots button:disabled {
+	background-color: gray;
+	cursor: not-allowed;
+}
+
+/* Style the message paragraph */
+#listOfAllSlots p {
+	margin: 0;
+	font-weight: bold;
+	color: red;
+}
+
+.form-button-container {
+	display: flex; /* Use flexbox layout */
+	justify-content: space-between; /* Space evenly between the buttons */
+	align-items: center; /* Center vertically */
+	margin-top: 10px;
+	/* Add some spacing between the buttons and other form elements if needed */
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.button-form {
+	display: inline-block;
+}
+
+.easy-connect-container {
+	text-align: center;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+}
+
+/* Style for the icon image */
+.icon {
+	width: 200px;
+	height: 45px;
+}
+
+.center-box {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 10vh;
+}
+
+.box {
+	border: 2px solid #3498db; /* Border color */
+	border-radius: 10px; /* Rounded corners */
+	padding: 20px;
+	background-color: #f2f2f2; /* Background color */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+	text-align: center;
+}
+
+/* Style for the "Easy Connect" title */
+.title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/* Style for the icon image */
+.icon {
+	width: 200px;
+	height: 45px;
+}
+
+.center-icon {
+	text-align: center;
+}
+
+.center-icon img {
+	display: block;
+	margin: 0 auto;
+}
+
+button {
+	background-color: #3498db;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: bold; /* Make the text bold */
+}
+
+/* Style the "Book" button when disabled */
+button:disabled {
+	background-color: gray;
+	cursor: not-allowed;
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.red {
+	color: #0024ff
+}
+
+.container {
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 5px 5px;
+	text-decoration: none;
+	align-items: center;
+	display: flex;
+}
+
+.pagination a.active {
+	background-color: gray;
+	color: white;
+	border-radius: 2px;
+	align-items: center;
+	display: flex;
+}
+
+#menu {
+	font-family: tahoma;
+	margin-top: 10px;
+	margin-right: 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 70px;
+	height: 70px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+	position: fixed; /* or absolute */
+	top: 60%;
+	left: 40%;
+}
+
+/* Safari */
+@
+-webkit-keyframes spin { 0% {
+	-webkit-transform: rotate(0deg);
+}
+
+100
+%
+{
+-webkit-transform
+:
+rotate(
+360deg
+);
+}
+}
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+
+100
+%
+{
+transform
+:
+rotate(
+360deg
+);
+}
+}
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+        /* Tab Styles */
+        .tabs {
+            display: flex;
+            margin-top: 20px;
+            width: 20%;
+            
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid #3498db;
+            background-color: #f7f7f7;
+        }
+
+        .tabContent {
+            display: none;
+        }
+
+        /* Form Styles */
+        .form-container {
+            width: 97%;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Apply the "narrow-input" class to the input elements to reduce width */
+        .form-container input[type="datetime-local"],
+        .form-container input[type="text"] {
+            width: 50%; /* Adjust the width as needed */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container .red {
+            color: #0024ff;
+        }
+
+        /* Loader Styles */
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 70px;
+            height: 70px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+            }
+        }
+
+        /* Keyframes for Loader */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Style for active tab */
+        .tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+ <body onload="myDate()">
+<!-- <div class="header">
+    <a th:href="@{/}">Home</a>
+    <img src="admin.png" alt="admin" width="60" height="60" align="right">
+    
+</div>
+ -->
+    <div class="container">
+        <a th:href="@{/}">
+            <img class="icon" src="EasyConnect.jpg" alt="Easy Connect">
+        </a>
+        <ul class="menu">
+            <li class="menu-item">
+                <a th:href="@{/admin1}" class="menu-link">Maintenance</a>
+            </li>
+            <li class="menu-item">
+                <a th:href="@{/}" class="menu-link">Home</a>
+            </li>
+        </ul>
+    </div>
+    
+	<br />
+
+
+<div class="tabs">
+    <div class="tab tabLink" onclick="openTab('CreateSlot')">Create Slot</div>
+    <div class="tab tabLink" onclick="openTab('CreateSlots')">Create Slots</div>
+    
+</div>
+
+<div id="CreateSlot" class="tabContent box" style="display: block;"> <!-- Modified the style here -->
+    <div class="form-container">
+        <form action="#" th:action="@{/admin1}" method="post" onload="myDate()">
+            <label for="slot_start"><b>Start Date & Time</b></label>
+            <input type="datetime-local" id="slot_start" name="slot_start" value="" class="narrow-input"><br>
+
+            <label for="slot_end"><b>End Date & Time</b></label>
+            <input type="datetime-local" id="slot_end" name="slot_end" value="" class="narrow-input"><br>
+
+            <label for="it_email_list"><b>IT Admin e-mail List</b></label>
+            <input type="text" id="it_email_list" name="it_email_list" value="saurabh.gupta940@hcl.com" class="narrow-input"><br>
+
+            <label for="attendee_email_list"><b>Attendee e-mail List</b></label>
+            <input type="text" id="attendee_email_list" name="attendee_email_list" value="saurabh2204@google.com" class="narrow-input"><br>
+
+            <label for="region"><b>Region</b></label>
+            <select class="narrow-input" id="region" name="region">
+								<option th:each="region : ${regions}" th:value="${region.name}"
+									th:text="${region.name}"></option>
+			</select>
+
+			<label for="is_booked"><b>Auto book?</b></label>
+			<select id="is_booked" name="is_booked" class="narrow-input">
+						    <option value="0">No</option>
+			
+			    <option value="1">Yes</option>
+			</select><br>
+
+
+            <label for="time_zone"><b>Time Zone</b></label>
+           <!--  <input type="text" id="time_zone" name="time_zone" value="IST" class="narrow-input"><br> -->
+            <select class="narrow-input" id="time_zone" name="time_zone">
+								<option th:each="time_zone : ${time_zones}" th:value="${time_zone}"
+									th:text="${time_zone}"></option>
+			</select>
+
+            <br/>
+            
+            
+
+            <input type="submit" value="Create Slot">
+            <span th:text="${msg}" class="red"></span>
+
+            <div id="helloid" class="loader"></div>
+        </form>
+    </div>
+</div>
+
+
+<div id="CreateSlots" class="tabContent box">
+    <div class="form-container">
+        <form action="#" th:action="@{/admin1}" method="post" onload="myDate()">
+            <label for="slot_start"><b>Start Date & Time</b></label>
+            <input type="datetime-local" id="slots_start" name="slot_start" value="" class="narrow-input"><br>
+
+            <label for="slots_end"><b>End Date & Time</b></label>
+            <input type="datetime-local" id="slots_end" name="slots_end" value="" class="narrow-input"><br>
+
+            <label for="it_email_list"><b>IT Admin e-mail List</b></label>
+            <input type="text" id="it_email_list" name="it_email_list" value="saurabh.gupta940@hcl.com" class="narrow-input"><br>
+
+            <label for="attendee_email_list"><b>Attendee e-mail List</b></label>
+            <input type="text" id="attendee_email_list" name="attendee_email_list" value="saurabh2204@google.com" class="narrow-input"><br>
+
+      		<label for="slot_duration" class="other"><b>Slot Duration(in Minutes)</b></label>
+  			<input type="text" id="slot_duration" name="slot_duration" value="60" class="narrow-input"><br>
+
+ <!--       <label for="include_weekends" class="other"><b>Include Weekends?</b></label>
+  			<input type="text" id="include_weekends" size="65" name="is_booked" value="0" class="narrow-input"><br>
+ --> 
+			 <label for="include_weekends" class="other"><b>Include Weekends?</b></label>
+			<select id="include_weekends" name="is_booked" class="narrow-input">
+						    <option value="0">No</option>
+			
+			    <option value="1">Yes</option>
+			</select><br>
+			 
+ 
+<div class="add-holiday-container">
+    <label for="holiday_calendar"><b>Add Holiday</b></label>
+    <input type="button" value="+" onclick="myFunctionHol()"  />
+</div> <br/>
+<input type="date" id="holiday_calendar" name="holiday_calendar" value="2022-08-22" class="narrow-input-date" />
+  <div id="demo1"></div>
+
+ <!-- 
+			 <input type="button" value="Add Holidays" onclick="myFunctionHol()"/>  			 
+			 <input type="date" id="holiday_calendar" name="holiday_calendar" value="2022-08-22" class="narrow-input">
+  -->
+
+            <label for="region"><b>Region</b></label>
+            <select class="narrow-input" id="region" name="region">
+								<option th:each="region : ${regions}" th:value="${region.name}"
+									th:text="${region.name}"></option>
+			</select>
+
+			<label for="is_booked"><b>Auto book?</b></label>
+			<select id="is_booked" name="is_booked" class="narrow-input">
+						    <option value="0">No</option>
+			
+			    <option value="1">Yes</option>
+			</select><br>
+
+
+            <label for="time_zone"><b>Time Zone</b></label>
+           <!--  <input type="text" id="time_zone" name="time_zone" value="IST" class="narrow-input"><br> -->
+            <select class="narrow-input" id="time_zone" name="time_zone">
+								<option th:each="time_zone : ${time_zones}" th:value="${time_zone}"
+									th:text="${time_zone}"></option>
+			</select>
+
+            <br/>
+            
+
+            <input type="submit" value="Create Slots">
+            <span th:text="${msg}" class="red"></span>
+		    <input type="hidden" id="holidays" name="holidays" value="">
+
+            <div id="helloid" class="loader"></div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

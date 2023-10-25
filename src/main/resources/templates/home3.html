@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home</title>
+<script type="text/javascript"></script>
+
+<style>
+#listOfAllSlots {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+	border: 1px solid #ddd;
+}
+
+/* Style table header */
+#listOfAllSlots th {
+	background-color: #3498db;
+	color: white;
+	text-align: left;
+	padding: 12px;
+	font-weight: bold;
+	border: 1px solid #ddd;
+}
+
+/* Style table rows */
+#listOfAllSlots td {
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+
+/* Alternate row background color */
+#listOfAllSlots tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+/* Style the buttons in each row */
+#listOfAllSlots button {
+	background-color: #3498db;
+	color: white;
+	border: none;
+	padding: 6px 12px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+/* Hover effect for buttons */
+#listOfAllSlots button:hover {
+	background-color: #2574a9;
+}
+
+/* Disable button style */
+#listOfAllSlots button:disabled {
+	background-color: gray;
+	cursor: not-allowed;
+}
+
+/* Style the message paragraph */
+#listOfAllSlots p {
+	margin: 0;
+	font-weight: bold;
+	color: red;
+}
+
+.form-button-container {
+	display: flex; /* Use flexbox layout */
+	justify-content: space-between; /* Space evenly between the buttons */
+	align-items: center; /* Center vertically */
+	margin-top: 10px;
+	/* Add some spacing between the buttons and other form elements if needed */
+}
+
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+
+.button-form {
+	display: inline-block;
+}
+
+.easy-connect-container {
+	text-align: center;
+	padding: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+}
+
+/* Style for the icon image */
+.icon {
+	width: 200px;
+	height: 45px;
+}
+
+.center-box {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 10vh;
+}
+
+.box {
+	border: 2px solid #3498db; /* Border color */
+	border-radius: 10px; /* Rounded corners */
+	padding: 20px;
+	background-color: #f2f2f2; /* Background color */
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow */
+	text-align: center;
+}
+
+/* Style for the "Easy Connect" title */
+.title {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+/* Style for the icon image */
+.icon {
+	width: 200px;
+	height: 45px;
+}
+
+.center-icon {
+	text-align: center;
+}
+
+.center-icon img {
+	display: block;
+	margin: 0 auto;
+}
+
+button {
+	background-color: #3498db;
+	color: white;
+	padding: 8px 16px;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	font-weight: bold; /* Make the text bold */
+}
+
+/* Style the "Book" button when disabled */
+button:disabled {
+	background-color: gray;
+	cursor: not-allowed;
+}
+
+.pagination {
+	display: inline-block;
+}
+
+.red {
+	color: #0024ff
+}
+
+.container {
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+}
+
+.pagination a {
+	color: black;
+	float: left;
+	padding: 5px 5px;
+	text-decoration: none;
+	align-items: center;
+	display: flex;
+}
+
+.pagination a.active {
+	background-color: gray;
+	color: white;
+	border-radius: 2px;
+	align-items: center;
+	display: flex;
+}
+
+#menu {
+	font-family: tahoma;
+	margin-top: 10px;
+	margin-right: 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+
+.loader {
+	border: 16px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 16px solid #3498db;
+	width: 70px;
+	height: 70px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+	position: fixed; /* or absolute */
+	top: 60%;
+	left: 40%;
+}
+
+/* Safari */
+@
+-webkit-keyframes spin { 0% {
+	-webkit-transform: rotate(0deg);
+}
+
+100
+%
+{
+-webkit-transform
+:
+rotate(
+360deg
+);
+}
+}
+@
+keyframes spin { 0% {
+	transform: rotate(0deg);
+}
+
+100
+%
+{
+transform
+:
+rotate(
+360deg
+);
+}
+}
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+</style>
+
+<script type="text/javascript">
+
+function setValue(source) {
+    //document.getElementById("helloid").style.display = ""; 
+    document.getElementById("loaderid").className  = "loader"; 
+}
+
+function clearForm() {
+    document.getElementById("clear_usrform").submit(); // Submit the second form
+}
+
+function filterForm() {
+    document.getElementById("filter_usrform").submit(); // Submit the form
+}
+
+</script>
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery UI Dialog - Default functionality</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script>
+  $( function() {
+    $( "#dialog" ).dialog();
+  } );
+  </script>
+
+<script>
+function myFunction(id) {
+  let emailId = prompt("Please enter your e-mail id", "saurabh.gupta@hcl.com");
+  if (emailId != null) {
+    document.getElementById(id+"-msg").innerHTML = "e-mail invite sent to " + emailId + "..";
+  }
+}
+
+function madeAjaxCall(slot_start, slot_end, id, timeZone){
+let emailId = prompt("Please enter your e-mail id", "saurabh.gupta@hcl.com");
+var link = /*[[@{/bookslot-and-create-event}]]*/ 'bookslot-and-create-event';
+
+if (emailId != null) {
+
+    $.ajax({
+     type: "post",
+     url: link,
+     cache: false,    
+	 data : 'startDateTime=' + slot_start + '&endDateTime=' + slot_end + '&emailId=' + emailId + "&requestId="+ id + "&timeZone="+ timeZone + "&is_booked="+ true,
+     success: function(response){
+    		document.getElementById("msg-"+id).innerHTML = "e-mail invite sent to " + emailId + "..";
+    	    //document.getElementById("result").className  = ""; 
+    	    document.getElementById("msg-"+id).style.color = "red";
+    	    document.getElementById(id).disabled = "true";
+
+     },
+     error: function(){      
+      alert('Error while request..');
+     }
+    });
+
+   // madeAjaxCall3();
+}
+}
+
+
+
+</script>
+<script
+	src="https://apis.google.com/js/platform.js?onload=onLoadCallback"
+	async defer></script>
+</head>
+<body>
+
+	<div id="menu">
+		<!--          <a href="/admin" >IT Admin</a>
+ -->
+		<a th:href="@{/admin}">IT Admin</a>
+	</div>
+
+
+	<div class="easy-connect-container">
+
+		<a href="/it-patch-mgmt"> <img class="icon" src="EasyConnect.jpg"
+			alt="Easy Connect">
+		</a>
+	</div>
+
+	<br />
+
+	<div class="box">
+		<form th:action="@{/user}" id="filter_usrform" method="POST">
+
+			<table id="filterSlots">
+				<thead>
+					<tr>
+						<th>Slot Start</th>
+						<th>Slot End</th>
+						<th>Time Zone</th>
+						<th>Region</th>
+						<th>Show only Available Slots</th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="datetime-local" id="filter_slot_start"
+							name="filter_slot_start" th:value="${filter_slot_start}">
+						</td>
+						<td><input type="datetime-local" id="filter_slot_end"
+							name="filter_slot_end" th:value="${filter_slot_end}"></td>
+						<td>
+							<!--	  <input type="text" id="time_zone"  name="time_zone" value=""> -->
+							<select class="form-control" id="time_zone" name="time_zone">
+								<option th:each="option : ${options}" th:value="${option}"
+									th:text="${option}"></option>
+						</select>
+						</td>
+						<td>
+							<!-- 		<input type="text" id="region"  name="region" value="">  -->
+							<select class="form-control" id="region" name="region">
+								<option th:each="region : ${regions}" th:value="${region}"
+									th:text="${region}"></option>
+						</select>
+						</td>
+
+						<td><input type="checkbox" id="is_booked" name="is_booked"
+							th:checked="${checkedMarkForAvailableFilterCheckbox}"
+							th:value="${checkedMarkForAvailableFilterCheckbox}"></td>
+
+					</tr>
+				</tbody>
+			</table>
+
+			<button type="button" onclick="filterForm()">Filter</button>
+
+			<button type="button" onclick="clearForm()">Clear</button>
+			<!-- Button to clear the second form -->
+
+		</form>
+
+		<form th:action="@{/user}" id="clear_usrform" method="GET"></form>
+	</div>
+
+
+	<!-- <center><img src="Patch_icon.png" alt="Patch Management"  width="300" height="200" align="middle">
+</center> -->
+	<br />
+	<table id="listOfAllSlots">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Slot Start</th>
+				<th>Slot End</th>
+				<th>Time Zone</th>
+				<th>IT Admin Email List</th>
+				<th>Employee Email List</th>
+				<th>Region</th>
+				<th>Booking</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="book, iStat : ${bookPage.content}"
+				th:style="${iStat.odd}? 'font-weight: bold;'"
+				th:alt-title="${iStat.even}? 'even' : 'odd'">
+				<td><span th:data-name="${book.id}" th:text="${book.id}">-</span></td>
+				<td><span th:text="${book.slot_start}">-</span></td>
+				<td><span th:text="${book.slot_end}">-</span></td>
+				<td><span th:text="${book.time_zone}">-</span></td>
+				<td><span th:text="${book.it_email_list}">-</span></td>
+				<td><span th:text="${book.attendee_email_list}">-</span></td>
+				<td><span th:text="${book.region}">-</span></td>
+				<td>
+					<button th:disabled="${book.is_booked}" th:id="${book.id}"
+						th:onclick="madeAjaxCall([[${book.slot_start}]], [[${book.slot_end}]], [[${book.id}]], [[${book.time_zone}]])">Book
+						it</button>
+					<p th:id="'msg-' + ${book.id}"></p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+
+	<center>
+		<div th:if="${bookPage.totalPages > 0}" class="pagination"
+			th:each="pageNumber : ${pageNumbers}">
+			<a th:href="@{/user(size=${bookPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+		</div>
+	</center>
+	<!--     <div>
+        <p>
+            <a th:href="@{/}" th:text="#{msg.Home}"></a>
+        </p>
+    </div>
+  -->
+
+
+	<div id="loaderid"></div>
+
+
+</body>
+</html>

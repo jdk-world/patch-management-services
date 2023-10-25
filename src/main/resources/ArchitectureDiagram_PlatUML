@@ -1,0 +1,42 @@
+http://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000
+
+Architecture - 
+
+@startuml
+title EasyConnect Solution Architecture Diagram
+skinparam monochrome true
+
+actor Employee
+actor ITAdmin
+
+database DB
+node WebServer
+cloud EmailService
+cloud CalendarService
+
+Employee --> WebServer : access web page
+ITAdmin --> WebServer : access web page
+WebServer --> DB : read/write data
+WebServer --> EmailService : send/receive emails
+WebServer --> CalendarService : create/update events
+
+rectangle "Web Page" as WebPage {
+  (Publish Slots) as PS
+  (Book Slots) as BS
+  (Send Notifications) as SN
+  (Search Slots) as SS
+}
+
+WebServer ..> PS : provide UI
+WebServer ..> BS : provide UI
+WebServer ..> SN : provide UI
+WebServer ..> SS : provide UI
+
+ITAdmin --> PS : publish availability slots
+Employee --> BS : book slots as per availability
+WebServer --> SN : notify both groups with emails and calendar invites
+Employee --> SS : search slots with filters
+
+@enduml
+
+
