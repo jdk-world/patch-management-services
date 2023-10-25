@@ -57,7 +57,7 @@ public class PatchCatalogService {
 	
 	public String removePatch(Patch patch) {
 
-		String query= "DELETE from `springbootdb`.`Admin` WHERE roll_no = "+patch.getId() +";";
+		String query= "DELETE from `springbootdb`.`PatchCatalog` WHERE id = "+patch.getId() +";";
 
 		jdbc.execute(query);
 		return "Catelog entry deleted Successfully";
