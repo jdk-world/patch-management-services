@@ -16,7 +16,9 @@ public class PatchCatalogService {
 	@Autowired
 	JdbcTemplate jdbc;
 	public static final String DEFAULT_DATE_COMPLETION = "1900-01-01";//2023-11-02T11:01//2023-10-01
-	public static final String DEFAULT_PATCH_COMPLIANCE = "Non-compliant";
+	public static final String DEFAULT_PATCH_COMPLIANCE = "Non-compliant";//2023-11-02T11:01//2023-10-01
+
+
 
 	public List<Patch> getAllPatches() {
 

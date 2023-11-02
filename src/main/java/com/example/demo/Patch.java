@@ -11,6 +11,8 @@ class Patch {
 	private String application;
     private String applicabilityStatus;
     private String compatibility;
+
+    
     
     public String getIsActive() {
 		return isActive;

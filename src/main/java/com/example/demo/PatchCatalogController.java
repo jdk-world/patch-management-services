@@ -57,8 +57,10 @@ public class PatchCatalogController {
 		
 		String report = patchCatalogService.removePatches(slotIdList);
 		return report;
+
 	}
-	   
+	
+    
 	@RequestMapping(value = "/tag", method = RequestMethod.POST)
 	@ResponseBody
 	public String tagPatch(@RequestBody TagRequest tagRequestModel)
@@ -68,6 +70,7 @@ public class PatchCatalogController {
 		String msg = "";
 		msg = patchCatalogService.tagPatchsToEmps(tagRequestModel);
 		//model.addAttribute("msg", "Sucessfully created");
+
 		return msg;
 
 	}
