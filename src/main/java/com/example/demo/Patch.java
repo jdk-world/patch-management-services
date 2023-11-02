@@ -8,7 +8,9 @@ class Patch {
     private String releaseDate;
     private String complianceDate;
     private String isActive;
-
+	private String application;
+    private String applicabilityStatus;
+    private String compatibility;
     
     public String getIsActive() {
 		return isActive;
@@ -26,11 +28,7 @@ class Patch {
 		this.complianceDate = complianceDate;
 	}
 
-	private String application;
-    private String applicabilityStatus;
-    private String compatibility;
 
-    
     
     
     public String getCompatibility() {

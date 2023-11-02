@@ -49,13 +49,25 @@ public class PatchCatalogController {
 
 	}
 
+
 	@RequestMapping(value = "/remove-patch", method = RequestMethod.POST)
 	@ResponseBody
-	public String removeAdmin(@RequestBody Patch adminModel)
+	public String deletePatchs(@RequestBody List<String> slotIdList)
+				throws ParseException, IOException, GeneralSecurityException {
+		
+		String report = patchCatalogService.removePatches(slotIdList);
+		return report;
+	}
+	   
+	@RequestMapping(value = "/tag", method = RequestMethod.POST)
+	@ResponseBody
+	public String tagPatch(@RequestBody TagRequest tagRequestModel)
 			throws ParseException, IOException, GeneralSecurityException {
+		// System.err.println(BASE_PATH_CLOUD);
+		// utilService.setBASE_PATH_CLOUD(BASE_PATH_CLOUD);
 		String msg = "";
-		msg = patchCatalogService.removePatch(adminModel);
-
+		msg = patchCatalogService.tagPatchsToEmps(tagRequestModel);
+		//model.addAttribute("msg", "Sucessfully created");
 		return msg;
 
 	}
