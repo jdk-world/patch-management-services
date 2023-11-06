@@ -42,7 +42,7 @@ public class PatchCatalogController {
 		String msg = "";
 		msg = patchCatalogService.createPatch(patchModel.getName(), patchModel.getDescription(),
 					patchModel.getVersion(), patchModel.getReleaseDate(), patchModel.getComplianceDate(),
-					patchModel.getApplication(), "Applicable",patchModel.getCompatibility(),patchModel.getIsActive());
+					patchModel.getApplication(), patchModel.getCompatibility(),patchModel.getCompatibility(),patchModel.getIsActive());
 		//model.addAttribute("msg", "Sucessfully created");
 
 		return msg;
@@ -69,6 +69,20 @@ public class PatchCatalogController {
 		// utilService.setBASE_PATH_CLOUD(BASE_PATH_CLOUD);
 		String msg = "";
 		msg = patchCatalogService.tagPatchsToEmps(tagRequestModel);
+		//model.addAttribute("msg", "Sucessfully created");
+
+		return msg;
+
+	}
+
+	@RequestMapping(value = "/untag", method = RequestMethod.POST)
+	@ResponseBody
+	public String untagPatch(@RequestBody TagRequest tagRequestModel)
+			throws ParseException, IOException, GeneralSecurityException {
+		// System.err.println(BASE_PATH_CLOUD);
+		// utilService.setBASE_PATH_CLOUD(BASE_PATH_CLOUD);
+		String msg = "";
+		msg = patchCatalogService.untagPatchsToEmps(tagRequestModel);
 		//model.addAttribute("msg", "Sucessfully created");
 
 		return msg;

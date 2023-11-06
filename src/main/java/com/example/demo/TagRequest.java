@@ -4,6 +4,8 @@ import java.util.List;
 
 
 public class TagRequest {
+	private List<String> patchIdsList;
+    private List<String> empIdsList;
     public TagRequest(List<String> patchIdsList, List<String> empIdsList) {
 		super();
 		this.patchIdsList = patchIdsList;
@@ -21,8 +23,7 @@ public class TagRequest {
 	public void setEmpIdsList(List<String> empIdsList) {
 		this.empIdsList = empIdsList;
 	}
-	private List<String> patchIdsList;
-    private List<String> empIdsList;
+
 
     // Constructors, getters, and setters
 }
