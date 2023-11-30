@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: patch-management-services-ver1
-        image: docker.io/saurabh2204/patch-management-services:latest
+        image: gcr.io/dulcet-listener-317509/patch-management-services:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8897
