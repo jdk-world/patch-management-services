@@ -4,17 +4,17 @@ steps:
     entrypoint: 'mvn'
     args: ['clean', 'install', '-DskipTests']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'docker.io/saurabh2204/patch-management-services:latest', '.']
+    args: ['build', '-t', 'gcr.io/dulcet-listener-317509/patch-management-services:latest', '.']
   # push container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'docker.io/saurabh2204/patch-management-services:latest']
+    args: ['push', 'gcr.io/dulcet-listener-317509/patch-management-services:latest']
   # Deploy on GKE
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
     - run
     - --filename=deployment.yaml
-    - --image=docker.io/saurabh2204/patch-management-services:latest
-    - --location=us-central1-c
-    - --cluster=cluster-1
+    - --image=gcr.io/dulcet-listener-317509/patch-management-services:latest
+    - --location=us-central1
+    - --cluster=autopilot-cluster-easy-connect
 options:
   logging: CLOUD_LOGGING_ONLY
